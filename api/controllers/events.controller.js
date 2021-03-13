@@ -44,6 +44,14 @@ module.exports.delete = (req, res, next) => {
 }
 
 module.exports.update = (req, res, next) => {
+  const { location } = req.body;
+  if (location) {
+    req.body.location = {
+      type: 'Point',
+      coordinates: location
+    }
+  }
+  
   Event.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
     .then(event => {
       if (event) res.json(event)
