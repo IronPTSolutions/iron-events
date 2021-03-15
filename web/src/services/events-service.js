@@ -1,9 +1,9 @@
-
-// Iteration 1: init axios and implement list events method.
-const http = undefined;
+import http from './base-api-service';
 
 // The list method must return an array of events
-const list = () => {}
+const list = () => {
+  return http.get('/events').then(response => response.data);
+}
 
 // Iteration 2: implement get event method.
 // this method receives the event id and returns the event

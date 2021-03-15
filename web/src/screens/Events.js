@@ -1,7 +1,12 @@
+import { Fragment } from "react";
+import EventsList from '../components/events/EventsList';
 
 function Events() {
   return (
-    <div></div>
+    <Fragment>
+      <h3 className="mb-3">Best events in the area</h3>
+      <EventsList />
+    </Fragment>
   );
 }
 

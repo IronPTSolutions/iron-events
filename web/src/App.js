@@ -7,11 +7,13 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <Switch>
-        <Route exact path="/events" component={Events}/>
-        {/* Iteration 2: event detail path /events/:id */}
-        <Redirect to="/events" />
-      </Switch>
+      <div className="container pt-4 pb-5">
+        <Switch>
+          <Route exact path="/events" component={Events} />
+          {/* Iteration 2: event detail path /events/:id */}
+          <Redirect to="/events" />
+        </Switch>
+      </div>
       <Footer/>
     </Router>
   );

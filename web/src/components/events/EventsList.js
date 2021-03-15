@@ -1,12 +1,30 @@
 import { Component } from 'react';
+import EventItem from './EventItem';
+
+import eventsService from '../../services/events-service';
 
 class EventsList extends Component {
 
-  // Iteration 1: retrieve all events from API and render them.
-  // remember, you need to use the events' service after the first time that the component was rendered.
+  state = {
+    events: []
+  }
+
+  componentDidMount() {
+    eventsService.list()
+      .then(events => this.setState({ events }))
+      .catch(error => console.error(error))
+  }
 
   render() {
-    return (<div></div>)
+    const { events } = this.state;
+
+    return (
+      <div className="row row-cols-4">
+        {events.map(event => (
+          <div key={event.id} className="col"><EventItem event={event} /></div>
+        ))}
+      </div>
+    )
   }
 }
 
