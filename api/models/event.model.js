@@ -31,7 +31,7 @@ const eventSchema = new Schema({
   capacity: {
     type: Number,
     required: 'Capacity is required',
-    min: [1, 'Must be for greater than 0']
+    min: [1, 'Capacity must be grater than 0']
   },
   location: {
     type: {

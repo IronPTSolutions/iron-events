@@ -21,7 +21,7 @@ class EventsList extends Component {
     return (
       <div className="row row-cols-4">
         {events.map(event => (
-          <div key={event.id} className="col"><EventItem event={event} /></div>
+          <div key={event.id} className="col mb-4"><EventItem event={event} /></div>
         ))}
       </div>
     )
