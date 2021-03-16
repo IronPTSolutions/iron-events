@@ -1,7 +1,5 @@
 import { Component } from 'react';
 import { Redirect } from 'react-router';
-import DateTimePicker from 'react-datetime-picker';
-
 import eventsService from '../../services/events-service';
 
 const validations = {
