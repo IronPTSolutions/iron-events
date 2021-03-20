@@ -2,7 +2,13 @@ const createError = require('http-errors');
 const Event = require('../models/event.model');
 
 module.exports.list = (req, res, next) => {
-  Event.find()
+  const criteria = {}
+
+  if (req.query.tag) {
+    criteria.tags = req.query.tag
+  }
+
+  Event.find(criteria)
     .then(events => res.json(events))
     .catch(next)
 }

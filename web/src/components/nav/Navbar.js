@@ -1,7 +1,15 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import logo from '../../images/logo-ih.svg';
+import { logout } from '../../services/users-service'
 
 function Navbar() {
+  const history = useHistory()
+
+  async function handleLogout() {
+    await logout()
+    history.replace('/login')
+  }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
@@ -20,6 +28,8 @@ function Navbar() {
             <li className="nav-item"><Link className="nav-link text-light" to="/create-event"><i className="fa fa-plus" /></Link></li>
           </ul>
         </div>
+
+        <button type="submit" class="btn btn-danger btn-sm" onClick={handleLogout}>Logout</button>
       </div>
     </nav>
   );
