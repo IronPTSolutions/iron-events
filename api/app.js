@@ -34,6 +34,7 @@ app.use((req, res, next) => {
 app.use((error, req, res, next) => {
   if (error instanceof mongoose.Error.ValidationError) error = createError(400, error)
   else if (error instanceof mongoose.Error.CastError) error = createError(404, 'Resource not found')
+  else if (error.message.includes('E11000')) error = createError(400, 'Already exists')
 
   console.log(error);
 
