@@ -1,7 +1,6 @@
 const createError = require('http-errors');
 const User = require('../models/user.model');
-
-
+const passport = require('passport');
 
 module.exports.create = (req, res, next) => {
     User.create(req.body)
@@ -28,3 +27,18 @@ module.exports.update = (req, res, next) => {
         .then(user => res.status(202).json(user))
         .catch(next)
 }
+
+module.exports.login = (req, res, next) => {
+  passport.authenticate('local-auth', (error, user, validations) => {
+    if (error) {
+      next(error);
+    } else if (!user) {
+      next(createError(400, validations))
+    } else {
+      req.login(user, error => {
+        if (error) next(error)
+        else res.json(user)
+      })
+    }
+  })(req, res, next);
+};
