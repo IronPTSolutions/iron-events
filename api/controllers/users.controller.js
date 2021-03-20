@@ -16,7 +16,7 @@ module.exports.get = (req, res, next) => {
 
 module.exports.delete = (req, res, next) => {
     User.findByIdAndDelete(req.params.id)
-        .then(user => res.status(204).json({}))
+        .then(user => res.status(204).end())
         .catch(next)
 }
 
@@ -39,6 +39,12 @@ module.exports.totp = (req, res, next) => {
     }
 
     next(createError(400, 'invalid TOTP'))
+}
+
+module.exports.logout = (req, res, next) => {
+  req.logout();
+
+  res.status(204).end()
 }
 
 module.exports.login = (req, res, next) => {
