@@ -31,6 +31,19 @@ it('create user', async (done) => {
   expect(res2.body.name).toBe('Alex')
   expect(res2.body.password).toBe(undefined)
 
+
+
+  const res3 = await request.patch(`/api/users/${id}`).send({
+    name: 'Alejandro'
+  })
+
+  expect(res3.status).toBe(202)
+  expect(res3.body.name).toBe('Alejandro')
+
+
+  const res4 = await request.delete(`/api/users/${id}`)
+
+  expect(res4.status).toBe(204)
   done()
 })
 
