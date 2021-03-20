@@ -52,7 +52,7 @@ module.exports.login = (req, res, next) => {
     if (error) {
       next(error);
     } else if (!user) {
-      next(createError(400, validations))
+      next(createError(400, 'Invalid credentials'))
     } else {
       req.login(user, error => {
         if (error) next(error)

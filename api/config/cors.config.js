@@ -6,6 +6,7 @@ const allowedOrigins = (process.env.CORS_ORIGINS || 'http://localhost:3000')
   .map(o => o.trim());
 
 module.exports = cors({
+  credentials: true,
   origin: (origin, next) => {
     const allowed = !origin || allowedOrigins.indexOf(origin) !== -1;
     if (allowed) {

@@ -1,29 +1,14 @@
 import http from './base-api-service';
 
-const list = () => {
-  return http.get('/events')
-    .then(response => response.data);
-}
+const list = () => http.get('/events')
 
-const get = (id) => {
-  return http.get(`/events/${id}`)
-    .then(response => response.data);
-}
+const get = (id) => http.get(`/events/${id}`)
 
-const create = (event) => {
-  return http.post(`/events`, event)
-    .then(response => response.data);
-}
+const create = (event) => http.post(`/events`, event)
 
-const remove = (id) => {
-  return http.delete(`/events/${id}`)
-    .then(response => response.data);
-}
+const remove = (id) => http.delete(`/events/${id}`)
 
-const update = (event) => {
-  return http.put(`/events`, event)
-    .then(response => response.data);
-}
+const update = (event) => http.put(`/events`, event)
 
 const service = {
   create,
@@ -32,4 +17,5 @@ const service = {
   list,
   get
 }
+
 export default service;
