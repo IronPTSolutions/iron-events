@@ -40,7 +40,7 @@ function Login() {
           <form className="mt-3 mb-3" onSubmit={handleSubmit}>
             <div className="input-group mb-1">
               <div className="input-group-prepend">
-                <span className="input-group-text"><i className="fa fa-envelope-o" aria-hidden="true"></i></span>
+                <span className="input-group-text"><i className="fa fa-envelope-o fa-fw" aria-hidden="true"></i></span>
               </div>
               <input type="email" className="form-control" name="email"
                 onChange={handleChange} required
@@ -49,7 +49,7 @@ function Login() {
 
             <div className="input-group mb-1">
               <div className="input-group-prepend">
-                <span className="input-group-text"><i className="fa fa-lock" aria-hidden="true"></i></span>
+                <span className="input-group-text"><i className="fa fa-lock fa-fw" aria-hidden="true"></i></span>
               </div>
               <input type="password" className="form-control" name="password" value={data.password}
                 onChange={handleChange}
