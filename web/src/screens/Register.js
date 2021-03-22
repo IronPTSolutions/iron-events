@@ -1,18 +1,18 @@
-import LoginForm from '../components/users/LoginForm';
+import RegisterForm from '../components/users/RegisterForm';
 import { Link } from 'react-router-dom';
 
-function Login() {
+function Register() {
   return (
     <div className="row">
       <div className="col-12 col-sm-4 mx-auto">
-        <LoginForm />
+        <RegisterForm />
         <hr/>
         <div className="d-grid gap-2">
-          <Link className="btn btn-secondary" type="button" to="/register">Register</Link>
+          <Link className="btn btn-secondary" type="button" to="/login">Login</Link>
         </div>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Register;

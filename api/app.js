@@ -42,7 +42,7 @@ app.use((error, req, res, next) => {
   data.message = error.message;
   data.errors = error.errors ? 
     Object.keys(error.errors)
-      .reduce((errors, key) => ({ ...errors, [key]: error.errors[key].message }), {}) : 
+      .reduce((errors, key) => ({ ...errors, [key]: error.errors[key]?.message || error.errors[key] }), {}) :
     undefined;
 
   res.status(error.status || 500).json(data)
