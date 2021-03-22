@@ -5,6 +5,7 @@ import Events from './screens/Events';
 import EventForm from './components/events/EventForm';
 import EventDetail from './components/events/EventDetail';
 import Login from './screens/Login';
+import Register from './screens/Register';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <div className="container pt-4 pb-5">
         <Switch>
           <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
           <Route exact path="/events" component={Events} />
           <Route exact path="/create-event" component={EventForm} />
           <Route exact path="/events/:id" component={EventDetail} />
