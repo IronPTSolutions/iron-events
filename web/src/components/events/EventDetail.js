@@ -44,13 +44,14 @@ function EventDetail() {
 
     let isUnmounted = false;
     fetchEvent();
+
     return () => {
       // componentWillUnmount
       console.info(`Unmounting component...`);
       isUnmounted = true;
     }
   }, []); 
-  // El segundo argumento representa el array de dependencias ([]), 
+  // ^^ El segundo argumento representa el array de dependencias ([]), 
   // solo se volverá a ejecutar la función de useEffect cuando cambie el valor de una de sus dependecias 
   // (si está vacío solo se ejecutará una vez)
 
