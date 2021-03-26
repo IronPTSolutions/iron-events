@@ -71,7 +71,7 @@ const validations = {
   },
 }
 
-function EventForm() {
+function EventForm({ event: eventToEdit }) {
 
   const history = useHistory();
   const [state, setState] = useState({
@@ -84,17 +84,18 @@ function EventForm() {
       end: '',
       latitude: '',
       longitude: '',
-      tags: ''
+      tags: '',
+      ...eventToEdit
     },
     errors: {
-      title: validations.title(),
-      description: validations.description(),
-      image: validations.image(),
-      capacity: validations.capacity(),
-      start: validations.start(),
-      end: validations.end(),
-      latitude: validations.latitude(),
-      longitude: validations.longitude()
+      title: validations.title(eventToEdit.title),
+      description: validations.description(eventToEdit.description),
+      image: validations.image(eventToEdit.image),
+      capacity: validations.capacity(eventToEdit.capacity),
+      start: validations.start(eventToEdit.start),
+      end: validations.end(eventToEdit.end),
+      latitude: validations.latitude(eventToEdit.latitude),
+      longitude: validations.longitude(eventToEdit.longitude)
     },
     touch: {}
   });
@@ -132,10 +133,10 @@ function EventForm() {
 
     if (isValid()) {
       try {
-        const eventCreationData = state.event;
-        eventCreationData.location = [eventCreationData.longitude, eventCreationData.latitude];
-        eventCreationData.tags = eventCreationData?.tags.split(',').map(tag => tag.trim()) || [];
-        const event = await eventsService.create(eventCreationData);
+        const eventData = state.event;
+        eventData.location = [eventData.longitude, eventData.latitude];
+        eventData.tags = eventData.tags.split(',').map(tag => tag.trim()) || [];
+        const event = eventData.id ? await eventsService.update(eventData) : await eventsService.create(eventData);
         history.push(`/events/${event.id}`);
       } catch(error) {
         const { message, errors } = error.response?.data || error;
@@ -241,7 +242,12 @@ function EventForm() {
             <div className="invalid-feedback">{errors.tags}</div>
           </div>
           
-          <button type="submit" className="btn btn-primary" disabled={!isValid()}>Create Event</button>
+          <div className="d-grid">
+            <button type="submit" className="btn btn-primary" disabled={!isValid()}>
+              {event.id && <span>Update Event</span>}
+              {!event.id && <span>Create Event</span>}
+            </button>
+          </div>
         </form>
       </div>
     </div>
