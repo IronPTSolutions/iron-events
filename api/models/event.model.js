@@ -1,4 +1,5 @@
 const moment = require('moment');
+const User = require('./user.model');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -71,7 +72,12 @@ const eventSchema = new Schema({
       message: props => `Ending must not be before the start date`
     }
   },
-  tags: [String]
+  tags: [String],
+  owner: {
+    ref: User.modelName,
+    type: mongoose.Types.ObjectId,
+    require: 'Owner is required'
+  }
 }, {
   timestamps: true,
   toJSON: {

@@ -8,7 +8,7 @@ const create = (event) => http.post(`/events`, event)
 
 const remove = (id) => http.delete(`/events/${id}`)
 
-const update = (event) => http.put(`/events`, event)
+const update = (event) => http.put(`/events/${event.id}`, event)
 
 const service = {
   create,
