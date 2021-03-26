@@ -3,9 +3,13 @@ const Event = require('../models/event.model');
 
 module.exports.list = (req, res, next) => {
   const criteria = {}
+  const { tags, search } = req.query;
 
-  if (req.query.tag) {
-    criteria.tags = req.query.tag
+  if (tags) {
+    criteria.tags = tags
+  }
+  if (search) {
+    criteria.title = new RegExp(search, 'i');
   }
 
   Event.find(criteria)
