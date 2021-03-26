@@ -37,6 +37,7 @@ function LoginForm() {
       history.push('/');
     } catch (error) {
       const { message, errors } = error.response ? error.response.data : error;
+      console.error(message);
       setState(state => ({
         ...state,
         errors: errors
