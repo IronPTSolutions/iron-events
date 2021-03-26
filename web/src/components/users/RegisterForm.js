@@ -93,7 +93,7 @@ function RegisterForm() {
         history.push('/login', { email: user.email });
       } catch (error) {
         const { message, errors } = error && error.response ? error.response.data : error;
-        console.error(error.response.data);
+        console.error(message);
         setState(state => ({
           ...state,
           errors: errors
