@@ -71,7 +71,7 @@ const validations = {
   },
 }
 
-function EventForm({ event: eventToEdit }) {
+function EventForm({ event: eventToEdit = {} }) {
 
   const history = useHistory();
   const [state, setState] = useState({
