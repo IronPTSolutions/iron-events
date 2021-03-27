@@ -23,24 +23,14 @@ function EventDetail() {
     // componentDidMount
 
     async function fetchEvent() {
-      try {
-        const { id } = params;
-        console.info(`Feting event ${id}...`)
-        const event = await eventsService.get(id)
-        if (!isUnmounted) {
-          // La promesa de 'eventsService.get' puede tardar mucho en resolverse y el usuario podría
-          // decidir cambiar de ruta, debemos asegurarnos de que actualizamos el estado solo si el componente
-          // sigue vivo.
-          setEvent(event);
-        }
-      } catch (error) {
-        if (!isUnmounted) {
-          if (error.response?.status === 404) {
-            history.push('/');
-          } else {
-            console.error(error);
-          }
-        }
+      const { id } = params;
+      console.info(`Feting event ${id}...`)
+      const event = await eventsService.get(id)
+      if (!isUnmounted) {
+        // La promesa de 'eventsService.get' puede tardar mucho en resolverse y el usuario podría
+        // decidir cambiar de ruta, debemos asegurarnos de que actualizamos el estado solo si el componente
+        // sigue vivo.
+        setEvent(event);
       }
     }
 
@@ -89,7 +79,7 @@ function EventDetail() {
           </div>
         )}
       </div>
-      {user.id === event.owner.id && (
+      {user?.id === event.owner.id && (
         <div className="col my-3 text-center">
           <div className="alert alert-secondary" role="alert">
             <h4 className="fw-light mb-2">Admin Area</h4>

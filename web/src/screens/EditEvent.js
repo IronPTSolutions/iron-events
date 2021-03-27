@@ -18,7 +18,7 @@ function EditEvent() {
       const { id } = params;
       const event = await eventsService.get(id);
       if (!isUnmounted) {
-        if (user.id !== event.owner.id) {
+        if (user?.id !== event.owner.id) {
           history.push('/403')
         } else {
           // Prepare model for EventForm
