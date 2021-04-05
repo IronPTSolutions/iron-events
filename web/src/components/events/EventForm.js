@@ -101,7 +101,12 @@ function EventForm({ event: eventToEdit = {} }) {
   });
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    let { name, value } = event.target;
+
+    if (event.target.files) {
+      value = event.target.files[0]
+    }
+
     setState(state => {
       return {
         ...state,
@@ -200,8 +205,8 @@ function EventForm({ event: eventToEdit = {} }) {
           
           <div className="input-group mb-2">
             <span className="input-group-text"><i className="fa fa-picture-o fa-fw"></i></span>
-            <input type="text" name="image" className={`form-control ${(touch.image && errors.image) ? 'is-invalid' : ''}`} placeholder="Event image..."
-              value={event.image} onBlur={handleBlur} onChange={handleChange} />
+            <input type="file" name="image" className={`form-control ${(touch.image && errors.image) ? 'is-invalid' : ''}`} placeholder="Event image..."
+              onBlur={handleBlur} onChange={handleChange} />
             <div className="invalid-feedback">{errors.image}</div>
           </div>
 

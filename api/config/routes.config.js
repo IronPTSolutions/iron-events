@@ -3,12 +3,13 @@ const router = express.Router();
 const secure = require('../middlewares/secure.middleware');
 const events = require('../controllers/events.controller');
 const users = require('../controllers/users.controller');
+const upload = require('./multer.config');
 
 router.get('/events', events.list);
-router.post('/events', secure.isAuthenticated, events.create);
+router.post('/events', secure.isAuthenticated, upload.single('image'), events.create);
 router.get('/events/:id', events.get);
 router.delete('/events/:id', secure.isAuthenticated, events.delete);
-router.put('/events/:id', secure.isAuthenticated, events.update);
+router.put('/events/:id', secure.isAuthenticated, upload.single('image'), events.update);
 
 router.post('/users', users.create);
 router.get('/users/:id', secure.isAuthenticated, users.get);
