@@ -10,6 +10,9 @@ const userSchema = new Schema({
         type: String,
         required: 'An user name is required'
     },
+    social: {
+        google: String
+    },
     email: {
         unique: true,
         type: String,

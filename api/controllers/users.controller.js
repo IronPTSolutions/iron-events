@@ -16,6 +16,10 @@ module.exports.create = (req, res, next) => {
 }
 
 module.exports.get = (req, res, next) => {
+  if (req.params.id === 'me') {
+    return res.json(req.user)
+  }
+
   User.findById(req.params.id)
     .then(user => res.status(200).json(user))
     .catch(next)
@@ -68,3 +72,19 @@ module.exports.login = (req, res, next) => {
     }
   })(req, res, next);
 };
+
+module.exports.loginWithGoogle = (req, res, next) => {
+  const passportController = passport.authenticate('google-auth', (error, user, validations) => {
+    if (error) {
+      next(error);
+    } else {
+      req.login(user, error => {
+        if (error) next(error)
+
+        else res.redirect(`${process.env.WEB_URL}/authenticate/google/cb`)
+      })
+    }
+  })
+  
+  passportController(req, res, next);
+}

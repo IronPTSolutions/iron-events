@@ -1,8 +1,14 @@
 const express = require('express');
+const passport = require('passport');
 const router = express.Router();
 const secure = require('../middlewares/secure.middleware');
 const events = require('../controllers/events.controller');
 const users = require('../controllers/users.controller');
+
+const GOOGLE_SCOPES = [
+  'https://www.googleapis.com/auth/userinfo.email',
+  'https://www.googleapis.com/auth/userinfo.profile'
+]
 
 router.get('/events', events.list);
 router.post('/events', secure.isAuthenticated, events.create);
@@ -17,6 +23,10 @@ router.patch('/users/:id', secure.isAuthenticated, users.update);
 
 router.post('/login', users.login)
 router.post('/logout', users.logout)
+router.post('/login', users.login)
+
+router.get('/authenticate/google', passport.authenticate('google-auth', { scope: GOOGLE_SCOPES }))
+router.get('/authenticate/google/cb', users.loginWithGoogle)
 
 router.post('/totp', users.totp)
 
