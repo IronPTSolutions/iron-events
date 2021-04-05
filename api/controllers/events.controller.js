@@ -35,7 +35,11 @@ module.exports.create = (req, res, next) => {
     coordinates: location
   }
   req.body.owner = req.user.id;
-  
+
+  if (req.file) {
+    req.body.image = req.file.url
+  }
+
   Event.create(req.body)
     .then(event => res.status(201).json(event))
     .catch(error => {
@@ -64,6 +68,11 @@ module.exports.update = (req, res, next) => {
       coordinates: location
     }
   }
+
+  if (req.file) {
+    req.body.image = req.file.url
+  }
+
   // Remove attributes than cant be modified
   delete req.body.owner;
   delete req.body.id;
