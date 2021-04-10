@@ -1,3 +1,4 @@
+const createError = require('http-errors');
 const express = require('express');
 const router = express.Router();
 const secure = require('../middlewares/secure.middleware');
@@ -15,9 +16,16 @@ router.get('/users/:id', secure.isAuthenticated, users.get);
 router.delete('/users/:id', secure.isAuthenticated, users.delete);
 router.patch('/users/:id', secure.isAuthenticated, users.update);
 
-router.post('/login', users.login)
-router.post('/logout', users.logout)
+router.post('/login', users.login);
+router.post('/logout', users.logout);
 
-router.post('/totp', users.totp)
+router.post('/totp', users.totp);
+
+/** Movemos el handler el 404 a este router para que solo afecte a la api,
+ * así podemos controlar desde el app.js que el resto de peticiones vayan al react
+ */
+router.use((req, res, next) => {
+  next(createError(404, 'Route not found'));
+});
 
 module.exports = router;
