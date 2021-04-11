@@ -41,3 +41,7 @@ docker run --env MONGODB_URI=mongodb://mongo:27017/iron-events --link mongo -p 3
 # Deploy in Heroku using docker
 
 https://devcenter.heroku.com/articles/build-docker-images-heroku-yml
+
+# Social Login
+
+![OAuth Flow]./docs/oauth-flow.png)
