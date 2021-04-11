@@ -1,10 +1,10 @@
 import { useContext, Fragment } from 'react';
 import { Link, NavLink, useHistory } from 'react-router-dom';
 import logo from '../../images/logo-ih.svg';
-import i18next from 'i18next'
 import { useTranslation } from 'react-i18next';
 import { logout } from '../../services/users-service';
 import { AuthContext } from '../../contexts/AuthStore';
+import Langs from '../langs/Langs';
 
 function Navbar() {
   const { t } = useTranslation()
@@ -15,11 +15,6 @@ function Navbar() {
     await logout();
     onUserChange(undefined);
     history.push('/login');
-  }
-
-  function handleLanguage (item) {
-    localStorage.setItem('lng', item)
-    i18next.changeLanguage(item);
   }
 
 
@@ -37,18 +32,6 @@ function Navbar() {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to="/events">{t('Navbar.events')}</NavLink></li>
           </ul>
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <button type="submit" className="btn btn-link link-unstyled" onClick={() => handleLanguage('es')}>
-                <img src='/icons/es.png' alt="icon-es" style={{width: '50px', height: '50px' }}/>
-              </button>
-            </li>
-            <li className="nav-item">
-              <button type="submit" className="btn btn-link link-unstyled"  onClick={() => handleLanguage('en')}>
-                <img src='/icons/en.png' alt="icon-en" style={{width: '50px', height: '50px' }} />
-              </button>
-            </li>
-          </ul>
           <ul className="navbar-nav d-flex">
             {!isAuthenticated() && (
               <Fragment>
@@ -63,6 +46,7 @@ function Navbar() {
                 <li className="nav-item"><button type="submit" className="btn btn-link link-unstyled text-light" onClick={handleLogout}><i className="fa fa-sign-out" ></i></button></li>
               </Fragment>
             )}
+          <li className="nav-item" style={{ paddingTop: '5px'}}><Langs /></li>
           </ul>
         </div>
       </div>
