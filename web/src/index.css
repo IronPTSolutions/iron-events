@@ -21,3 +21,13 @@ code {
   text-decoration: none !important;
   color: inherit;
 }
+
+
+.lang-group img {
+  height: 20px;
+  width: 20px;
+}
+
+.lang-group .btn:focus {
+  box-shadow: none;
+}
