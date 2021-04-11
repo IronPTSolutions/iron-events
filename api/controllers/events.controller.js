@@ -30,6 +30,7 @@ module.exports.get = (req, res, next) => {
 
 module.exports.create = (req, res, next) => {
   const { location } = req.body;
+  console.log('location', location);
   req.body.location = {
     type: 'Point',
     coordinates: location
@@ -56,7 +57,8 @@ module.exports.delete = (req, res, next) => {
     .then(event => {
       if (!event) next(createError(404, 'Event not found'))
       else if (event.owner != req.user.id) next(createError(403, 'Only the owner of the event can perform this action'))
-      else return event.delete();
+      else return event.delete()
+        .then(() => res.status(204).end());
     }).catch(next)
 }
 

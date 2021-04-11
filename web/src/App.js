@@ -10,6 +10,7 @@ import AuthStore from './contexts/AuthStore';
 import PrivateRoute from './guards/PrivateRoute';
 import Error from './screens/Error';
 import EditEvent from './screens/EditEvent';
+import AuthCallback from './screens/AuthCallback';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Navbar />
         <div className="container pt-4 pb-5">
           <Switch>
+            <Route exact path="/authenticate/google/cb" component={AuthCallback}/>
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             

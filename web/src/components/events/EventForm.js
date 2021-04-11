@@ -138,8 +138,8 @@ function EventForm({ event: eventToEdit = {} }) {
 
     if (isValid()) {
       try {
-        const eventData = state.event;
-        eventData.location = [eventData.longitude, eventData.latitude];
+        const eventData = {...state.event};
+        eventData.location = [Number(eventData.longitude), Number(eventData.latitude)];
         eventData.tags = eventData.tags.split(',').map(tag => tag.trim()) || [];
         const event = eventData.id ? await eventsService.update(eventData) : await eventsService.create(eventData);
         history.push(`/events/${event.id}`);

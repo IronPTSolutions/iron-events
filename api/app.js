@@ -41,9 +41,11 @@ app.use((error, req, res, next) => {
   else if (error.message.includes('E11000')) error = createError(400, 'Already exists')
   else if (!error.status) error = createError(500, error)
 
-  if (error.status >= 500) {
-    console.error(error);
-  }
+  // if (error.status >= 500) {
+  //   console.error(error);
+  // }
+  console.error(error);
+
 
   const data = {}
   data.message = error.message;
