@@ -44,4 +44,4 @@ https://devcenter.heroku.com/articles/build-docker-images-heroku-yml
 
 # Social Login
 
-![OAuth Flow]./docs/oauth-flow.png)
+![OAuth Flow](./docs/oauth-flow.png)
