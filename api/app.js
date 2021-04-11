@@ -13,6 +13,9 @@ const session = require('./config/session.config');
 
 const app = express();
 
+/** React app */
+app.use(express.static(`${__dirname}/react-app`));
+
 /** Middlewares */
 app.use(express.json());
 app.use(logger('dev'));
@@ -25,21 +28,24 @@ app.use(passport.session());
 const router = require('./config/routes.config')
 app.use('/api', router);
 
+/** Configure react routes */
+// Todo lo que no sea /api => ruta del react
+app.get('/*', (req, res) => {
+  res.sendFile(`${__dirname}/react-app/index.html`)
+})
 
 /** Handle Errors */
-app.use((req, res, next) => {
-  next(createError(404, 'Route not found'));
-});
-
 app.use((error, req, res, next) => {
   if (error instanceof mongoose.Error.ValidationError) error = createError(400, error)
   else if (error instanceof mongoose.Error.CastError) error = createError(404, 'Resource not found')
   else if (error.message.includes('E11000')) error = createError(400, 'Already exists')
   else if (!error.status) error = createError(500, error)
 
-  if (error.status >= 500) {
-    console.error(error);
-  }
+  // if (error.status >= 500) {
+  //   console.error(error);
+  // }
+  console.error(error);
+
 
   const data = {}
   data.message = error.message;

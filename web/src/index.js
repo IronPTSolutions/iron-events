@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './services/i18n-service'; // init i18n system
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';

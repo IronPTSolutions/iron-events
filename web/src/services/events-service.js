@@ -4,7 +4,18 @@ const list = (search) => http.get('/events', { params: { search } })
 
 const get = (id) => http.get(`/events/${id}`)
 
-const create = (event) => http.post(`/events`, event)
+const create = (event) => {
+  console.log(event);
+  const data = new FormData()
+
+  Object.keys(event).forEach(key => {
+    if (Array.isArray(event[key])) {
+      event[key].forEach(value => data.append(`${key}[]`, value))
+    } else data.append(key, event[key])
+  })
+
+  return http.post(`/events`, data)
+}
 
 const remove = (id) => http.delete(`/events/${id}`)
 

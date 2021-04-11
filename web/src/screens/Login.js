@@ -1,7 +1,6 @@
 import LoginForm from '../components/users/LoginForm';
 import { Link } from 'react-router-dom';
-
-const socialLoginUrl = `${process.env.REACT_APP_API_BASE_URL}/authenticate/google`
+import { socialLoginUrl } from '../services/users-service';
 
 function Login() {
   return (
@@ -11,7 +10,7 @@ function Login() {
         <hr/>
         <div className="d-grid gap-2">
           <Link className="btn btn-secondary" type="button" to="/register">Register</Link>
-          <a className="btn btn-danger" href={socialLoginUrl}>Google Login</a>
+          <a className="btn btn-danger" href={socialLoginUrl}><i className="fa fa-google"></i> Login with Google</a>
         </div>
       </div>
     </div>
